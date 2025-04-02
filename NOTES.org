@@ -1,0 +1,30 @@
+#+title: Noj Book Emacs notes
+#+author: Piotr Kaznowski
+
+
+Those are temporary notes, need to explore "easier" options which maybe wouldn't require port forwarding etc.
+
+
+* LSP in tramp
+
+#+begin_src emacs-lisp :results silent
+(progn
+  (setq lsp-enable-file-watchers nil) ;; prevents reentrant TRAMP errors
+  (setq lsp-use-plists t)             ;; sometimes helps over TRAMP
+  (setq lsp-remote-auto-download-server nil)
+  (with-eval-after-load 'lsp-mode
+    (lsp-register-client
+     (make-lsp-client
+      :new-connection (lsp-tramp-connection "clojure-lsp")
+      :major-modes '(clojure-mode clojurescript-mode clojurec-mode)
+      :remote? t
+      :server-id 'clojure-lsp-tramp))))
+#+end_src
+
+
+* Docker & repl
+
+After starting the devcontainer, start a REPL inside the container with =clojure
+-M:nrepl --bind 0.0.0.0 --port 55555=.  Open file in Emacs with
+=/docker:vscode@<conainer name>:/workspaces/...=, then connect to =localhost:55555=
+using Cider.  =Clay= should be able to connect via port *1971*.

@@ -1,4 +1,4 @@
-{:paths ["src" "resources"]
+{:paths ["src" "resources" "notebooks" "notebooks/noj_book/"] ;; WIP check: not sure if extra paths are required here
  :deps {clojure.java-time/clojure.java-time       {:mvn/version "1.4.3"}
         scicloj/tablecloth                        {:mvn/version "7.042"}
         org.scicloj/tcutils                       {:mvn/version "0.1.0-alpha2"}
@@ -96,4 +96,7 @@
                             ;; :git/sha "5a75f897243714a0a7d91e30ab28eac9982f260c"}
                             }
                ;;{:mvn/version "0.4.332"}
-               }}}
+               }
+  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "1.1.0"}}
+          :main-opts ["-m" "nrepl.cmdline"]}}
+ }
